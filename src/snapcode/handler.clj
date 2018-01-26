@@ -4,14 +4,17 @@
             [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
             [ring.middleware.json :refer [wrap-json-response wrap-json-params wrap-json-body]]
             [ring.middleware.cors :as cors]
-            [ring.util.response :as response]
+            [ring.util.response :refer [response redirect]]
             [snapcode.evaluator :as ceval]))
 
 (defroutes app-routes
-           (GET "/" [] (response/file-response "../../resources/public/index.html"))
+           (GET "/" [] "Hello")
+
            (POST "/upload"
                  request
-             (ceval/eval-code "clojure" (:body request)))
+             (let [res (ceval/eval-code "clojure" (:body request))]
+               (response res)))
+
            (route/resources "/")
            (route/not-found "Not Found"))
 

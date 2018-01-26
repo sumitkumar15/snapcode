@@ -2,6 +2,12 @@
 
 (defn eval-code
   [lang code-string]
-  (let [d (:code code-string)]
+  (let [d (get code-string "code")]
     (cond
-      (= lang "clojure") (eval (read-string d)))))
+      (= lang "clojure") (try
+                           {:status "success"
+                            :result (eval (read-string d))}
+                           (catch Exception e
+                             {:status "failed"
+                              :error (str e)}))
+      :default nil)))
