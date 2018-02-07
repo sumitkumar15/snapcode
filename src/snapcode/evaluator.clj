@@ -21,10 +21,7 @@
                  (str file ".py"))
       "clisp" (do
                  (spit (str "execfiles/" file ".lisp") code)
-                 (str file ".lisp"))
-      "gcc" (do
-                (spit (str "execfiles/" file ".c") code)
-                (str file ".c")))))
+                 (str file ".lisp")))))
 
 (defn return-out
   [data file]
@@ -66,9 +63,6 @@
                           ;(io/delete-file file)
                           (return-out res temp))
 
-      (= lang "gcc") (let [res (sh/sh "timeout" "8" "gcc" file "| ./a.out")]
-                         ;(io/delete-file file)
-                         (return-out res temp))
       :default {:result "failed"
                 :error "Language not defined"})))
 

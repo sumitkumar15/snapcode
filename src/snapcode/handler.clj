@@ -7,8 +7,7 @@
             [ring.middleware.session :refer [wrap-session]]
             [ring.util.response :refer [response redirect]]
             [snapcode.evaluator :as ceval]
-            [clojure.java.io :as io]
-            [clojure.core.async :refer [go <!]]))
+            [clojure.java.io :as io]))
 
 (defroutes app-routes
            (GET "/" [] (io/resource "public/index.html"))
