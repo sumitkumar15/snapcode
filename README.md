@@ -12,6 +12,8 @@ You will need [Leiningen][] 2.0.0 or above installed.
 
 [leiningen]: https://github.com/technomancy/leiningen
 
+You need clojure installed 'clojure' should be present on your global environment variable. 
+
 ## Running
 
 To start a web server for the application, run:
